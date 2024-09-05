@@ -1,6 +1,8 @@
 # Astro HTML Resume
 
-Why a resume in Astro? Two reasons:
+* [Demo](https://astro-html-resume.pages.dev/)
+
+**Why** a resume in Astro? Two reasons:
 1. I wanted a resume that stands out while still being substance over style and being properly read by ATS. HTML (converted to a pdf later) fits this and Astro allows fast iteration.
 2. I wanted the info on my [personal website](https://average.website), also made in Astro, to be in sync with my resume. Having all the information in yaml is a bonus.
 
