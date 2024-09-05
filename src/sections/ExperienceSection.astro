@@ -1,0 +1,102 @@
+---
+import { Icon } from 'astro-icon/components'
+import Section from '../components/Section.astro'
+import { getExperience } from '../data/experience'
+import {
+    properCase,
+    unsluglify,
+    getDisplayDate,
+} from '../util'
+
+const experience = await getExperience()
+---
+
+<Section id="experience" data-count={experience.length}>
+    <div class="section-title">
+        <h2>Experience</h2>
+        <Icon name="ri:briefcase-4-fill" />
+    </div>
+
+    <div>
+        {experience.map(({ id, data: { url, title, startYear, startMonth, endYear, endMonth, image, skills, bullets, description } }) => (
+            <div class="experience">
+                <div class="name">
+                    <h3>{properCase(unsluglify(id))}</h3>
+                    {/* {image && <img src={image} alt="" class="logo" />} */}
+                    {url && (
+                        <a href={url} target="_blank" referrerpolicy="no-referrer" class="ez-click">
+                            <Icon name="ri:external-link-line" />
+                        </a>
+                    )}
+                </div>
+                <div>
+                    <div class="title-and-dates">
+                        <div class="title">{title}</div>
+                        <div class="dates">{getDisplayDate(startYear, startMonth)} - {getDisplayDate(endYear, endMonth)}</div>
+                    </div>
+                    <div class="description">
+                        {description}
+                    </div>
+                    {/* <div class="skills">
+                        Skills: {skills.join(', ')}
+                    </div> */}
+                    {bullets?.length && (
+                        <ul>
+                            {bullets.map(item => <li>{item}</li>)}
+                        </ul>
+                    )}
+                </div>
+            </div>
+        ))}
+    </div>
+</Section>
+
+<style>
+    #experience[data-count="0"] {
+        display: none;
+    }
+
+    .experience {
+    }
+
+    .experience:not(:last-child)::after {
+        content: "";
+        display: block;
+        height: 1px;
+        margin: 0.25rem 0rem;
+        background: linear-gradient(to right, transparent 20%, #0008, transparent 80%);
+    }
+
+    .name {
+        display: flex;
+        align-items: baseline;
+        gap: 0.5ch;
+    }
+
+    .title-and-dates {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+
+    .title {
+        font-weight: bold;
+    }
+
+    .logo {
+        height: 1.5em;
+        filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.5));
+    }
+
+    .description {
+    }
+
+    .skills {
+    }
+
+    @media print {
+        .name a {
+            display: none;
+        }
+    }
+</style>

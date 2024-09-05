@@ -1,0 +1,8 @@
+priority: 50
+skills:
+  - MySQL
+  - MongoDB
+  - DynamoDB
+  - Redis
+  - Hibernate
+  - Prisma

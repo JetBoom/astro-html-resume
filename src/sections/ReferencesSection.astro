@@ -1,0 +1,49 @@
+---
+import { Icon } from 'astro-icon/components'
+import Section from '../components/Section.astro'
+import { getReferences } from '../data/references'
+import { unsluglify, properCase } from '../util'
+
+const references = await getReferences()
+---
+
+<Section id="references" data-count={references.length}>
+    <div class="section-title">
+        <h2>References</h2>
+        <Icon name="ri:suitcase-fill" />
+    </div>
+
+    <div class="references">
+        {references.map(({ id, data: { title, company, email, phone } }) => (
+            <div class="reference">
+                <div class="name">{properCase(unsluglify(id))}</div>
+                <div style="flex-grow:1;">{title} @ {company}</div>
+                {email && <div><a href={`mailto:${email}`}>{email}</a></div>}
+                {phone && <div><a href={`tel:${phone.replaceAll(/[^\d\+]/g, '')}`}>{phone}</a></div>}
+            </div>
+        ))}
+    </div>
+</Section>
+
+<style>
+    #references[data-count="0"] {
+        display: none;
+    }
+
+    .references {
+        /* display: grid; */
+        /* grid-template-columns: auto auto auto; */
+        gap: 0.5em;
+    }
+
+    .name {
+        font-weight: bold;
+    }
+
+    .reference {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        gap: 1ch;
+    }
+</style>

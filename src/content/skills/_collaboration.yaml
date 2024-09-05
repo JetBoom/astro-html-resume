@@ -1,0 +1,7 @@
+# These are kind of implied and superfluous
+# Also, any content files that start with _ won't be included
+skills:
+  - Slack
+  - Teams
+  - Bitbucket
+  - Confluence

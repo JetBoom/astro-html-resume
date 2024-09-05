@@ -1,0 +1,173 @@
+:root {
+    --font-size-2xl: 32px;
+    --font-size-xl: 24px;
+    --font-size-lg: 20px;
+    --font-size-md: 16px;
+    --font-size-sm: 14px;
+	--font-size-xs: 12px;
+
+	--font-family: 'Noto Sans', system-ui, sans-serif;
+
+    --col-fg: black;
+    --col-bg: white;
+
+    --col-primary: rgb(216, 14, 14);
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body, html {
+	margin: 0 auto;
+
+	font-size: var(--font-size-md);
+
+    font-family: var(--font-family);
+    font-optical-sizing: auto;
+    font-weight: normal;
+    font-variation-settings: "wdth" 100;
+
+	-webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+@media not print {
+	html {
+		width: 8.5in;
+	}
+}
+
+body {
+	background: var(--col-bg);
+	color: var(--col-fg);
+	/* line-height: 1.2; */
+	outline: 1px solid #efefef;
+}
+
+p {
+	margin: 0;
+}
+
+h1, h2, h3 {
+	margin: 0;
+	padding: 0;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+h2, h3 {
+	color: var(--col-primary);
+}
+
+h1 {
+	font-size: var(--font-size-2xl);
+}
+
+h2 {
+	font-size: var(--font-size-xl);
+}
+
+h3 {
+	font-size: var(--font-size-lg);
+}
+
+/* h1::first-letter, h2::first-letter, h3::first-letter {
+	font-size: 140%; 
+	font-weight: bold;
+} */
+
+a {
+	color: inherit;
+}
+
+small, .small {
+	font-size: var(--font-size-sm);
+}
+
+ol, ul {
+	margin: 0;
+	padding-left: 1.25rem;
+}
+
+li {
+	margin-left: 0;
+	padding-left: 0;
+}
+
+.text-center {
+	text-align: center;
+}
+
+.split {
+	display: grid;
+	gap: 1rem;
+	grid-template-columns: auto auto;
+}
+
+.split-favor-left {
+	grid-template-columns: 70% auto;
+}
+
+.split-favor-right {
+	grid-template-columns: auto 70%;
+}
+
+.split-even {
+	grid-template-columns: repeat(2, 1fr);
+}
+
+hr {
+	border: 0;
+	height: 2px;
+    background: linear-gradient(to right, transparent, var(--col-primary), transparent);
+}
+
+.section-title {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 1ch;
+	border-bottom: 2px solid #00000044;
+
+	& > svg {
+		font-size: 1.5em;
+		color: #000a;
+		
+	}
+
+	& > sub {
+		flex-grow: 1;
+		text-align: right;
+		bottom: 0;
+		position: static;
+		align-self: flex-end;
+		height: 1em;
+		font-size: var(--font-size-sm);
+	}
+}
+
+.text-primary {
+	color: var(--col-primary);
+}
+
+/** Apply to links to expand their clickable region. */
+.ez-click {
+	position: relative;
+
+	&::after {
+		position: absolute;
+		content: '';
+		inset: -0.5em;
+	}
+}
+
+@media print {
+	astro-dev-toolbar {
+		display: none;
+	}
+
+	/* a {
+		text-decoration: none;
+	} */
+}

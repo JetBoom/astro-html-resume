@@ -1,0 +1,80 @@
+---
+import { Icon } from 'astro-icon/components'
+import Section from '../components/Section.astro'
+import { getMySelf } from '../data/myself'
+import { stripProtocol } from '../util'
+
+const {
+	name,
+    title,
+    email,
+    phone,
+    linkedin,
+    github,
+    website,
+    location,
+    summary,
+} = await getMySelf()
+---
+
+<Section id="summary">
+    <h1 class="text-primary">{name}</h1>
+    <b>{title}</b>
+
+    <div class="contacts">
+        <div>
+            <a href={`mailto:${email}`}>{email}</a>
+            <Icon name="ri:mail-send-fill" class="text-primary" />
+        </div>
+        <div>
+            <a href={`https://linkedin.com/in/${linkedin}`}>linkedin.com/in/{linkedin}</a>
+            <Icon name="logos:linkedin-icon" />
+        </div>
+        <div>
+            <a href={website}>{stripProtocol(website)}</a>
+            <Icon name="ri:computer-line" class="text-primary" />
+        </div>
+        <div>
+            <a href={`tel:${phone}`}>{phone}</a>
+            <Icon name="ri:phone-fill" class="text-primary" />
+        </div>
+        <div>
+            <a href={`https://github.com/${github}`}>github.com/{github}</a>
+            <Icon name="logos:github-icon" />
+        </div>
+        <div>
+            <span>{location}</span>
+            <Icon name="ri:map-pin-2-fill" class="text-primary" />
+        </div>
+    </div>
+
+    <p>{summary}</p>
+</Section>
+
+<style>
+    #summary {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+    }
+
+    p {
+        text-align: justify;
+    }
+
+    .contacts {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        border-bottom: 2px dotted var(--col-fg);
+        padding-bottom: 0.5rem;
+        margin-bottom: 0.25rem;
+
+        & > * {
+            display: flex;
+            gap: 0.5ch;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+</style>

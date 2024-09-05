@@ -1,0 +1,40 @@
+---
+import { Icon } from 'astro-icon/components'
+import Section from '../components/Section.astro'
+import { getAwards } from '../data/awards'
+import {
+    unsluglify,
+    properCase,
+    stripProtocol,
+} from '../util'
+
+const awards = await getAwards()
+---
+
+<Section id="awards" data-count="1">
+    <div class="section-title">
+        <h2>Awards</h2>
+        <Icon name="ri:trophy-fill" />
+    </div>
+
+    <div class="awards">
+        {awards.map(({ id, data: { url, description } }) => (
+            <div class="award">
+                <h3>{properCase(unsluglify(id))}</h3>
+                {url && <a href={url}>{stripProtocol(url)}</a>}
+                {description}
+            </div>
+        ))}
+    </div>
+</Section>
+
+<style>
+    #awards[data-count="0"] {
+        display: none;
+    }
+
+    .award {
+        display: flex;
+        flex-direction: column;
+    }
+</style>

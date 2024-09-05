@@ -1,0 +1,5 @@
+priority: 50
+skills:
+  - Redux
+  - Mobx
+  - GraphQL

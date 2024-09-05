@@ -1,0 +1,20 @@
+---
+import type { HTMLAttributes } from 'astro/types'
+type Props = HTMLAttributes<'section'>
+
+const { props } = Astro
+---
+
+<section {...props}>
+    <slot />
+</section>
+
+<style>
+    section {
+        padding: 0.25rem 0.1rem;
+    }
+
+    /* section:not(:first-of-type) {
+        margin-top: 0.75rem;
+    } */
+</style>

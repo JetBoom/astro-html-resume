@@ -1,0 +1,55 @@
+---
+import { Icon } from 'astro-icon/components'
+import Section from '../components/Section.astro'
+import { getEducation } from '../data/education'
+import { unsluglify, properCase } from '../util'
+
+const education = await getEducation()
+---
+
+<Section id="education" data-count={education.length}>
+    <div class="section-title">
+        <h2>Education</h2>
+        <Icon name="ri:school-fill" />
+    </div>
+
+    <div class="education">
+        {education.map(({ id, data: { degree, description, image } }) => (
+            <div class="education-item">
+                <div>
+                    <h3>{properCase(unsluglify(id))}</h3>
+                    <div class="degree">{degree}</div>
+                    {description && <div>{description}</div>}
+                </div>
+                {image && <img src={image} alt="" />}
+            </div>
+        ))}
+    </div>
+</Section>
+
+<style>
+    #education[data-count="0"] {
+        display: none;
+    }
+
+    .education {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .education-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        & > img {
+            max-width: 2em;
+            max-height: 2em;
+        }
+    }
+
+    .degree {
+        font-weight: bold;
+    }
+</style>

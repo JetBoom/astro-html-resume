@@ -1,0 +1,26 @@
+url: https://ac.me
+linkedin: https://www.linkedin.com/company/acme
+#image: logos/acmecorp.svg
+title: Senior Software Engineer
+startMonth: 12
+startYear: 2022
+endMonth: 1
+endYear: 2023
+description: >
+  Took ownership of multiple React + Node projects.
+  Mentored and code reviewed for the entire team.
+  Maintained HIPAA and SOC 2 compliance. Worked with FHIR records while creating patient portals.
+skills:
+  - TypeScript
+  - Redux
+  - GraphQL
+  - Jest
+  - DocumentDB
+  - Serverless
+  - S3
+  - SQS
+  - Docker
+  - Material UI
+bullets:
+  - Created a data cache system, reducing page load times by up to 90%.
+  - Resolved 3 years of tech debt and shrunk the code base by 30%.

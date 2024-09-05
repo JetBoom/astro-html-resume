@@ -1,0 +1,8 @@
+url: https://github.com/JetBoom/astro-html-resume
+icons:
+  - logos:typescript-icon
+  - logos:astro-icon
+  - logos:html-5
+  - logos:css-3
+description: >
+  This resume is made with Astro so I can keep the info in sync with my portfolio website also made in Astro.
