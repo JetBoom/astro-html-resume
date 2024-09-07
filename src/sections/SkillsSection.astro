@@ -1,8 +1,8 @@
 ---
 import { Icon } from 'astro-icon/components'
-import Section from '../components/Section.astro'
-import { getSkills } from '../data/skills'
-import { unsluglify, properCase } from '../util'
+import Section from '@/components/Section.astro'
+import { getSkills } from '@/data/skills'
+import { unsluglify, properCase } from '@/util'
 
 const skillGroups = await getSkills()
 ---

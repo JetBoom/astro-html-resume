@@ -1,12 +1,12 @@
 ---
 import { Icon } from 'astro-icon/components'
-import Section from '../components/Section.astro'
-import { getExperience } from '../data/experience'
+import Section from '@/components/Section.astro'
+import { getExperience } from '@/data/experience'
 import {
     properCase,
     unsluglify,
     getDisplayDate,
-} from '../util'
+} from '@/util'
 
 const experience = await getExperience()
 ---

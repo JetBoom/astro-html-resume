@@ -1,13 +1,13 @@
 ---
 import { Icon } from 'astro-icon/components'
-import Section from '../components/Section.astro'
-import { getProjects } from '../data/projects'
-import { getMySelf } from '../data/myself'
+import Section from '@/components/Section.astro'
+import { getProjects } from '@/data/projects'
+import { getMySelf } from '@/data/myself'
 import {
     stripProtocol,
     properCase,
     unsluglify,
-} from '../util'
+} from '@/util'
 
 const { github } = await getMySelf()
 const projects = await getProjects()

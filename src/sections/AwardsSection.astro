@@ -1,12 +1,12 @@
 ---
 import { Icon } from 'astro-icon/components'
-import Section from '../components/Section.astro'
-import { getAwards } from '../data/awards'
+import Section from '@/components/Section.astro'
+import { getAwards } from '@/data/awards'
 import {
     unsluglify,
     properCase,
     stripProtocol,
-} from '../util'
+} from '@/util'
 
 const awards = await getAwards()
 ---
