@@ -85,6 +85,13 @@ small, .small {
 	font-size: var(--font-size-sm);
 }
 
+.text-2xl { font-size: var(--font-size-2xl); }
+.text-xl { font-size: var(--font-size-xl); }
+.text-lg { font-size: var(--font-size-lg); }
+.text-md { font-size: var(--font-size-md); }
+.text-sm { font-size: var(--font-size-sm); }
+.text-xs { font-size: var(--font-size-xs); }
+
 ol, ul {
 	margin: 0;
 	padding-left: 1.25rem;
