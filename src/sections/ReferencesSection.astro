@@ -17,7 +17,7 @@ const references = await getReferences()
         {references.map(({ id, data: { title, company, email, phone } }) => (
             <div class="reference">
                 <div class="name">{properCase(unsluglify(id))}</div>
-                <div style="flex-grow:1;">{title} @ {company}</div>
+                <div style="flex-grow:1;">{title} at {company}</div>
                 {email && <div><a href={`mailto:${email}`}>{email}</a></div>}
                 {phone && <div><a href={`tel:${phone.replaceAll(/[^\d\+]/g, '')}`}>{phone}</a></div>}
             </div>
@@ -31,8 +31,8 @@ const references = await getReferences()
     }
 
     .references {
-        /* display: grid; */
-        /* grid-template-columns: auto auto auto; */
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
         gap: 0.5em;
     }
 
@@ -41,9 +41,5 @@ const references = await getReferences()
     }
 
     .reference {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: baseline;
-        gap: 1ch;
     }
 </style>
