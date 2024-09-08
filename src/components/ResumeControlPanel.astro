@@ -2,7 +2,7 @@
 ---
 
 <div id="control-panel">
-    <div title="ATS apparently works better vs. single column page setups.">
+    <div title="ATS apparently works better vs. single column page setups while humans would be better off reading the double column version.">
         <label for="toggle-columns">Single column for main section</label>
         <input type="checkbox" id="toggle-columns" />
     </div>
@@ -36,12 +36,12 @@
     }
 </style>
 
-<script>
-    document.querySelector('#toggle-columns').addEventListener('click', (e) => {
+<script is:inline>
+    document.querySelector('#toggle-columns')?.addEventListener('click', (e) => {
         document.querySelector('body').classList.toggle('single-column', e.currentTarget.checked)
     })
 
-    document.querySelector('#toggle-summary').addEventListener('click', (e) => {
+    document.querySelector('#toggle-summary')?.addEventListener('click', (e) => {
         document.querySelector('body').classList.toggle('hide-summary', e.currentTarget.checked)
     })
 </script>
