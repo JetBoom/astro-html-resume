@@ -48,7 +48,7 @@ const {
         </div>
     </div>
 
-    <p>{summary}</p>
+    <p class="summary-text">{summary}</p>
 </Section>
 
 <style>
@@ -76,5 +76,11 @@ const {
             justify-content: center;
             align-items: center;
         }
+    }
+</style>
+
+<style is:global>
+    body.hide-summary .summary-text {
+        display: none;
     }
 </style>

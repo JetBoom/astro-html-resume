@@ -21,8 +21,6 @@ const skillGroups = await getSkills()
             </div>
         ))}
     </div>
-
-    <small>...and more</small>
 </Section>
 
 <style>
@@ -35,8 +33,10 @@ const skillGroups = await getSkills()
         flex-direction: column;
         /* gap: 0.5em; */
     }
+</style>
 
-    .skill::after {
+<style is:global>
+    body:not(.single-column) .skill::after {
         content: "";
         display: block;
         height: 1px;

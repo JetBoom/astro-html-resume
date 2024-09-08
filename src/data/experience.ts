@@ -7,6 +7,7 @@ const schema = z.object({
     endMonth: z.number().int().gte(1).lte(12).optional(),
     endYear: z.number().optional(),
 	description: z.string(),
+    location: z.string().optional(),
     url: z.string().url().optional(),
     linkedin: z.string().optional(),
     image: z.string().optional(),

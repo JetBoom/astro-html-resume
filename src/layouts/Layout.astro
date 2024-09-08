@@ -1,5 +1,6 @@
 ---
 import type { HTMLAttributes } from 'astro/types'
+import ResumeControlPanel from '@/components/ResumeControlPanel.astro'
 import { getMySelf } from '@/data/myself'
 import '@/styles/global.css?3'
 
@@ -35,6 +36,8 @@ const { name } = await getMySelf()
 			<slot />
 		</main>
 	</body>
+
+	<ResumeControlPanel />
 </html>
 
 <style>

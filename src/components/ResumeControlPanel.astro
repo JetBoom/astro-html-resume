@@ -1,0 +1,47 @@
+---
+---
+
+<div id="control-panel">
+    <div title="ATS apparently works better vs. single column page setups.">
+        <label for="toggle-columns">Single column for main section</label>
+        <input type="checkbox" id="toggle-columns" />
+    </div>
+    <div title="You may wish to exclude your summary and submit it separately as a cover letter.">
+        <label for="toggle-summary">Hide summary</label>
+        <input type="checkbox" id="toggle-summary" />
+    </div>
+</div>
+
+<style>
+    #control-panel {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+
+        position: fixed;
+        top: 1rem;
+        right: 1rem;
+
+        background: #181818;
+        color: white;
+
+        padding: 1rem;
+        border-radius: 0.5rem;
+    }
+
+    @media print {
+        #control-panel {
+            display: none;
+        }
+    }
+</style>
+
+<script>
+    document.querySelector('#toggle-columns').addEventListener('click', (e) => {
+        document.querySelector('body').classList.toggle('single-column', e.currentTarget.checked)
+    })
+
+    document.querySelector('#toggle-summary').addEventListener('click', (e) => {
+        document.querySelector('body').classList.toggle('hide-summary', e.currentTarget.checked)
+    })
+</script>

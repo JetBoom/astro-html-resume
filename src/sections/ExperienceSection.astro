@@ -18,22 +18,33 @@ const experience = await getExperience()
     </div>
 
     <div>
-        {experience.map(({ id, data: { url, title, startYear, startMonth, endYear, endMonth, image, skills, bullets, description } }) => (
+        {experience.map(({ id, data: { url, title, location, startYear, startMonth, endYear, endMonth, image, skills, bullets, description } }) => (
             <div class="experience">
-                <div class="name">
-                    <h3>{properCase(unsluglify(id))}</h3>
-                    {/* {image && <img src={image} alt="" class="logo" />} */}
-                    {url && (
-                        <a href={url} target="_blank" referrerpolicy="no-referrer" class="ez-click">
-                            <Icon name="ri:external-link-line" />
-                        </a>
+                <div class="header">
+                    <div class="name">
+                        <h3>{properCase(unsluglify(id))}</h3>
+                        {/* {image && <img src={image} alt="" class="logo" />} */}
+                        {url && (
+                            <a href={url} target="_blank" referrerpolicy="no-referrer" class="ez-click">
+                                <Icon name="ri:external-link-line" />
+                            </a>
+                        )}
+                    </div>
+                    <div class="dates">
+                        <Icon name="ri:calendar-line" />
+                        <span>{getDisplayDate(startYear, startMonth)} - {getDisplayDate(endYear, endMonth)}</span>
+                    </div>
+                </div>
+                <div class="header">
+                    <div class="title">{title}</div>
+                    {location && (
+                        <div class="location">
+                            <Icon name="ri:map-pin-2-line" />
+                            <span>{location}</span>
+                        </div>
                     )}
                 </div>
                 <div>
-                    <div class="title-and-dates">
-                        <div class="title">{title}</div>
-                        <div class="dates">{getDisplayDate(startYear, startMonth)} - {getDisplayDate(endYear, endMonth)}</div>
-                    </div>
                     <div class="description">
                         {description}
                     </div>
@@ -73,10 +84,10 @@ const experience = await getExperience()
         gap: 0.5ch;
     }
 
-    .title-and-dates {
+    .header {
         display: flex;
         justify-content: space-between;
-        align-items: flex-start;
+        align-items: center;
     }
 
     .title {
@@ -88,7 +99,14 @@ const experience = await getExperience()
         filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.5));
     }
 
+    .location, .dates {
+        display: flex;
+        align-items: center;
+        gap: 0.5ch;
+    }
+
     .description {
+        font-style: italic;
     }
 
     .skills {
