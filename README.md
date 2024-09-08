@@ -58,7 +58,7 @@ You *technically* can and it might look better with more width. If you think you
 * ATS isn't there to just throw resumes in the bin it can't perfectly parse. A human still goes through it and pushes Yes or No.
 * Recruiters, HR, and hiring managers see hundreds of boring black and white resumes a day. Think about standing out in any way possible to get to the interview step.
 
-## Why it's formatted the way it is
+## Tips
 
 ### Order
 
@@ -69,7 +69,15 @@ The order of a tech resume should be sorted from the most relevant, impressive i
 3. Skills.
 4. Open source projects.
 5. Education.
-6. References. Always last. If you choose to put "by request" then just exclude this portion.
+6. References.
+
+If you don't have any information to put in a section then just exclude it.
+
+### Single or double column?
+
+Most people will tell you that having a single column resume is required to get through ATS. I don't know if this is true so I've included an option to enable it or not.
+
+Historically I've submitted double column resumes that fit on a single page and was still getting swarmed by recruiters and callbacks.
 
 ### Bullet points for experience
 
@@ -77,6 +85,10 @@ These are for including measurable results.
 
 Showcase things in the past you've done that positively impacted your company or project. Then say exactly how much it impacted.
 If you don't know exactly how much then use your best guess.
+
+Don't write huge paragraphs! Be short and sweet; less is more. The `description` key of experience content is there for a very brief, one line explanation of what the company did at a high level.
+
+If a recruiter's interest isn't piqued by the **2nd bullet point** of the your latest experience then assume they've **stopped reading your resume**.
 
 Read more [here](https://cultivatedculture.com/resume-metrics).
 
