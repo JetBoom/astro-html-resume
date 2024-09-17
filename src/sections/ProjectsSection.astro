@@ -1,31 +1,23 @@
 ---
 import { Icon } from 'astro-icon/components'
-import Section from '@/components/Section.astro'
+import RenderMarkdown from '@/components/RenderMarkdown.astro'
 import { getProjects } from '@/data/projects'
-import { getMySelf } from '@/data/myself'
-import {
-    stripProtocol,
-    properCase,
-    unsluglify,
-} from '@/util'
 
-const { github } = await getMySelf()
 const projects = await getProjects()
 ---
 
-<Section id="experience" data-count={projects.length}>
+<section id="experience" data-item-count={projects.length}>
     <div class="section-title">
         <h2>Projects</h2>
-        <sub>Sample of some of my open source projects at <a href={`https://github.com/${github}`}>github.com/{github}</a></sub>
         <Icon name="ri:open-source-fill" />
     </div>
 
     <div class="projects">
-        {projects.map(({ id, data: { url, icons, description } }) => (
-            <div>
+        {projects.map(({ slug, data: { name, icons } }) => (
+            <article>
                 <div class="title">
-                    <h3>{properCase(unsluglify(id))}</h3>
-                    {icons?.length && (
+                    <h3>{name}</h3>
+                    {/* {icons?.length && (
                         <div class="icons">
                             <Icon name="ri:arrow-drop-left-line" />
                             {icons.map(icon => (
@@ -33,28 +25,17 @@ const projects = await getProjects()
                             ))}
                             <Icon name="ri:arrow-drop-right-line" />
                         </div>
-                    )}
+                    )} */}
                 </div>
-                {url && <a class="url" href={url}>{stripProtocol(url)}</a>}
                 <div class="description">
-                    {description}
+                    <RenderMarkdown type="projects" slug={slug} />
                 </div>
-            </div>
+            </article>
         ))}
     </div>
-</Section>
+</section>
 
 <style>
-    #projects[data-count="0"] {
-        display: none;
-    }
-
-    .projects {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 0.5rem 2rem;
-    }
-
     .title {
         display: flex;
         justify-content: space-between;
@@ -62,18 +43,13 @@ const projects = await getProjects()
         gap: 2ch;
     }
 
-    .icons {
+    /* .icons {
         display: flex;
         align-items: center;
         gap: 0.5ch;
         font-size: 1.25em;
-    }
-
-    .url {
-
-    }
+    } */
 
     .description {
-
     }
 </style>

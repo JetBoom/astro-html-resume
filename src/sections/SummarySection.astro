@@ -1,55 +1,63 @@
 ---
 import { Icon } from 'astro-icon/components'
-import Section from '@/components/Section.astro'
+import RenderMarkdown from '@/components/RenderMarkdown.astro'
 import { getMySelf } from '@/data/myself'
 import { stripProtocol } from '@/util'
 
 const {
 	name,
-    title,
+    // title,
     email,
     phone,
     linkedin,
     github,
     website,
-    location,
-    summary,
+    // location,
 } = await getMySelf()
 ---
 
-<Section id="summary">
-    <h1 class="text-primary">{name}</h1>
-    <b>{title}</b>
+<section id="summary">
+    <h1 class="personal">{name}</h1>
+    <!-- <b>{title}</b> -->
 
     <div class="contacts">
         <div>
-            <a href={`mailto:${email}`}>{email}</a>
-            <Icon name="ri:mail-send-fill" class="text-primary" />
-        </div>
-        <div>
-            <a href={`https://linkedin.com/in/${linkedin}`}>linkedin.com/in/{linkedin}</a>
             <Icon name="logos:linkedin-icon" />
+            <a href={`https://linkedin.com/in/${linkedin}`} class="personal">linkedin.com/in/{linkedin}</a>
         </div>
+        |
         <div>
-            <a href={website}>{stripProtocol(website)}</a>
-            <Icon name="ri:computer-line" class="text-primary" />
-        </div>
-        <div>
-            <a href={`tel:${phone}`}>{phone}</a>
             <Icon name="ri:phone-fill" class="text-primary" />
+            <span class="personal">{phone}</span>
+            <!-- <a href={`tel:${phone}`}>{phone}</a> -->
         </div>
+        |
         <div>
-            <a href={`https://github.com/${github}`}>github.com/{github}</a>
             <Icon name="logos:github-icon" />
+            <a href={`https://github.com/${github}`} class="personal">github.com/{github}</a>
         </div>
+        |
         <div>
-            <span>{location}</span>
-            <Icon name="ri:map-pin-2-fill" class="text-primary" />
+            <Icon name="ri:mail-send-fill" class="text-primary" />
+            <span class="personal">{email}</span>
+            <!-- <a href={`mailto:${email}`}>{email}</a> -->
         </div>
+        |
+        <div>
+            <Icon name="ri:computer-line" class="text-primary" />
+            <a href={website} class="personal">{stripProtocol(website)}</a>
+        </div>
+        <!-- | -->
+        <!-- <div>
+            <Icon name="ri:map-pin-2-fill" class="text-primary" />
+            <span class="personal">{location}</span>
+        </div> -->
     </div>
 
-    <p class="summary-text">{summary}</p>
-</Section>
+    <div class="summary-text">
+        <RenderMarkdown type="myself" slug="myself" />
+    </div>
+</section>
 
 <style>
     #summary {
@@ -59,13 +67,15 @@ const {
         text-align: center;
     }
 
-    p {
+    .summary-text {
         text-align: justify;
     }
 
     .contacts {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5em;
         border-bottom: 2px dotted var(--col-fg);
         padding-bottom: 0.5rem;
         margin-bottom: 0.25rem;
@@ -80,7 +90,13 @@ const {
 </style>
 
 <style is:global>
-    body.hide-summary .summary-text {
-        display: none;
+    body:not(.summary) {
+        & .summary-text {
+            display: none;
+        }
+
+        & .contacts {
+            border-bottom: 0;
+        }
     }
 </style>

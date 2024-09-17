@@ -1,46 +1,18 @@
 ---
 import { Icon } from 'astro-icon/components'
-import Section from '@/components/Section.astro'
-import { getSkills } from '@/data/skills'
-import { unsluglify, properCase } from '@/util'
+import { getSkillSections } from '@/data/skillsection'
+import RenderMarkdown from '@/components/RenderMarkdown.astro'
 
-const skillGroups = await getSkills()
+const skillGroups = await getSkillSections()
 ---
 
-<Section id="skills" data-count={skillGroups.length}>
+<section id="skills" data-item-count={skillGroups.length}>
     <div class="section-title">
         <h2>Skills</h2>
         <Icon name="ri:code-s-slash-fill" />
     </div>
 
-    <div class="skills">
-        {skillGroups.map(({ id, data: { skills } }) => (
-            <div class="skill">
-                <b>{properCase(unsluglify(id))}:</b>
-                <span>{skills.join(', ')}</span>
-            </div>
-        ))}
-    </div>
-</Section>
-
-<style>
-    #skills[data-count="0"] {
-        display: none;
-    }
-
-    .skills {
-        display: flex;
-        flex-direction: column;
-        /* gap: 0.5em; */
-    }
-</style>
-
-<style is:global>
-    body:not(.single-column) .skill::after {
-        content: "";
-        display: block;
-        height: 1px;
-        margin: 0.25rem 0rem;
-        background: linear-gradient(to right, #0008, transparent 50%);
-    }
-</style>
+    <article>
+        {skillGroups.map(({ slug }) => <RenderMarkdown type="skillsection" slug={slug} />)}
+    </article>
+</section>

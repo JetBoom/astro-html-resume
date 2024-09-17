@@ -1,17 +1,30 @@
 :root {
-    --font-size-2xl: 32px;
-    --font-size-xl: 24px;
-    --font-size-lg: 20px;
-    --font-size-md: 16px;
-    --font-size-sm: 14px;
-	--font-size-xs: 12px;
+    --font-size-page-title: 20pt;
+    --font-size-section-title: 14pt;
+    --font-size-entry-title: 11pt;
+    --font-size-normal: 10pt;
+    --font-size-small: 9pt;
+	--font-size-xs: 8pt;
 
-	--font-family: 'Noto Sans', system-ui, sans-serif;
+	--font-family: tohoma, 'Nunito', system-ui, sans-serif;
+	--font-family-page-title: serif;
 
     --col-fg: black;
     --col-bg: white;
 
-    --col-primary: rgb(216, 14, 14);
+    --col-primary: rgb(17, 85, 204);
+	--col-link: rgb(66, 120, 214);
+}
+
+@font-face {
+	font-family: 'Nunito';
+	src: url(../assets/fonts/Nunito-VariableFont_wght.ttf);
+}
+
+@font-face {
+	font-family: 'Nunito';
+	font-style: italic;
+	src: url(../assets/fonts/Nunito-Italic-VariableFont_wght.ttf);
 }
 
 * {
@@ -21,7 +34,7 @@
 body, html {
 	margin: 0 auto;
 
-	font-size: var(--font-size-md);
+	font-size: var(--font-size-normal);
 
     font-family: var(--font-family);
     font-optical-sizing: auto;
@@ -30,6 +43,7 @@ body, html {
 
 	-webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+	text-rendering: optimizeLegibility;
 }
 
 @media not print {
@@ -42,7 +56,11 @@ body {
 	background: var(--col-bg);
 	color: var(--col-fg);
 	/* line-height: 1.2; */
-	outline: 1px solid #efefef;
+}
+
+body.redact .personal, body.redact .personal * {
+	background: black!important;
+	color: black!important;
 }
 
 p {
@@ -53,23 +71,24 @@ h1, h2, h3 {
 	margin: 0;
 	padding: 0;
 	font-weight: bold;
-	text-transform: uppercase;
 }
 
 h2, h3 {
 	color: var(--col-primary);
+	margin-top: 0.25em;
 }
 
 h1 {
-	font-size: var(--font-size-2xl);
+	font-size: var(--font-size-page-title);
+	font-family: var(--font-family-page-title);
 }
 
 h2 {
-	font-size: var(--font-size-xl);
+	font-size: var(--font-size-section-title);
 }
 
 h3 {
-	font-size: var(--font-size-lg);
+	font-size: var(--font-size-entry-title);
 }
 
 /* h1::first-letter, h2::first-letter, h3::first-letter {
@@ -77,19 +96,34 @@ h3 {
 	font-weight: bold;
 } */
 
+table, tbody, th, tr {
+	width: 100%;
+}
+
+td {
+	padding: 0;
+}
+
+svg {
+	vertical-align: middle;
+}
+
+body.no-icons {
+	& svg, & img, & .is-icon {
+		display: none!important;
+	}
+}
+
 a {
-	color: inherit;
+	color: var(--col-link);
 }
 
 small, .small {
-	font-size: var(--font-size-sm);
+	font-size: var(--font-size-small);
 }
 
-.text-2xl { font-size: var(--font-size-2xl); }
-.text-xl { font-size: var(--font-size-xl); }
-.text-lg { font-size: var(--font-size-lg); }
-.text-md { font-size: var(--font-size-md); }
-.text-sm { font-size: var(--font-size-sm); }
+.text-normal { font-size: var(--font-size-normal); }
+.text-small { font-size: var(--font-size-small); }
 .text-xs { font-size: var(--font-size-xs); }
 
 ol, ul {
@@ -102,9 +136,23 @@ li {
 	padding-left: 0;
 }
 
-.text-center {
-	text-align: center;
+section[data-item-count="0"] {
+	display: none;
 }
+
+article, section {
+	/** Printing will go to the next page if needed rather than cutting sections in half. */
+	page-break-inside: avoid;
+	break-inside: avoid;
+	page-break-before: auto;
+	break-before: auto;
+}
+
+/* li::marker {
+	color: var(--col-primary);
+} */
+
+.text-center { text-align: center; }
 
 .split {
 	display: grid;
@@ -112,22 +160,17 @@ li {
 	grid-template-columns: auto auto;
 }
 
-.split-favor-left {
-	grid-template-columns: 70% auto;
-}
+.split-favor-left { grid-template-columns: 70% auto; }
+.split-favor-right { grid-template-columns: auto 70%; }
+.split-even { grid-template-columns: repeat(2, 1fr); }
 
-.split-favor-right {
-	grid-template-columns: auto 70%;
-}
-
-.split-even {
-	grid-template-columns: repeat(2, 1fr);
-}
+.grow { flex-grow: 1; }
 
 hr {
-	border: 0;
-	height: 2px;
-    background: linear-gradient(to right, transparent, var(--col-primary), transparent);
+	border-top-width: 1px;
+	border-bottom-width: 0;
+	color: #0008;
+	margin: 2px 0;
 }
 
 .section-title {
@@ -140,7 +183,6 @@ hr {
 	& > svg {
 		font-size: 1.5em;
 		color: #000a;
-		
 	}
 
 	& > sub {
@@ -150,7 +192,7 @@ hr {
 		position: static;
 		align-self: flex-end;
 		height: 1em;
-		font-size: var(--font-size-sm);
+		font-size: var(--font-size-small);
 	}
 }
 

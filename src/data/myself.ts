@@ -9,14 +9,13 @@ const schema = z.object({
     github: z.string(),
     website: z.string(),
     location: z.string(),
-    summary: z.string(),
 })
 
-export const MySelfCollection = defineCollection({ schema, type: 'data' })
+export const MySelfCollection = defineCollection({ schema, type: 'content' })
 
 export type MySelfType = z.infer<typeof schema>
 
 export async function getMySelf() {
-	let items = await getCollection('myself') ?? []
+	let items = await getCollection('myself')
 	return items[0].data
 }

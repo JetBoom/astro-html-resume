@@ -1,16 +1,56 @@
 ---
+type ResumeOptionType = {
+    name: string
+    toggle: string
+    tip?: string
+}
+
+const options: ResumeOptionType[] = [
+    {
+        name: 'Show professional summary',
+        toggle: 'summary',
+        tip: 'You may wish to exclude your summary and submit it separately as a cover letter.',
+    },
+    {
+        name: 'Show references',
+        toggle: 'references',
+    },
+    {
+        name: 'Show awards',
+        toggle: 'awards',
+    },
+    {
+        name: 'Hide all icons and images',
+        toggle: 'no-icons',
+        tip: 'ATS may get confused on images and icons.',
+    },
+    {
+        name: 'Redact personal information',
+        toggle: 'redact',
+    },
+]
 ---
 
 <div id="control-panel">
-    <div title="ATS apparently works better vs. single column page setups while humans would be better off reading the double column version.">
-        <label for="toggle-columns">Single column for main section</label>
-        <input type="checkbox" id="toggle-columns" />
-    </div>
-    <div title="You may wish to exclude your summary and submit it separately as a cover letter.">
-        <label for="toggle-summary">Hide summary</label>
-        <input type="checkbox" id="toggle-summary" />
-    </div>
+    {options.map(option => (
+        <div title={option.tip} data-toggle={option.toggle}>
+            <label for={`toggle-${option.toggle}`}>{option.name}</label>
+            <input type="checkbox" id={`toggle-${option.toggle}`} />
+        </div>
+    ))}
 </div>
+
+<script is:inline>
+    function setupToggle(toggleClass) {
+        document.querySelectorAll(`#toggle-${toggleClass}`).forEach(item => item.addEventListener('click', e => {
+            document.querySelector('body').classList.toggle(toggleClass, e.currentTarget.checked)
+        }))
+    }
+
+    document
+        .querySelectorAll('#control-panel > div[data-toggle')
+        .forEach(option => setupToggle(option.dataset.toggle))
+</script>
 
 <style>
     #control-panel {
@@ -27,6 +67,8 @@
 
         padding: 1rem;
         border-radius: 0.5rem;
+
+        font-size: 150%;
     }
 
     @media print {
@@ -35,13 +77,3 @@
         }
     }
 </style>
-
-<script is:inline>
-    document.querySelector('#toggle-columns')?.addEventListener('click', (e) => {
-        document.querySelector('body').classList.toggle('single-column', e.currentTarget.checked)
-    })
-
-    document.querySelector('#toggle-summary')?.addEventListener('click', (e) => {
-        document.querySelector('body').classList.toggle('hide-summary', e.currentTarget.checked)
-    })
-</script>

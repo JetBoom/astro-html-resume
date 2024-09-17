@@ -2,7 +2,7 @@
 import type { HTMLAttributes } from 'astro/types'
 import ResumeControlPanel from '@/components/ResumeControlPanel.astro'
 import { getMySelf } from '@/data/myself'
-import '@/styles/global.css?3'
+import '@/styles/global.css?5'
 
 type Props = HTMLAttributes<'main'>
 
@@ -41,9 +41,25 @@ const { name } = await getMySelf()
 </html>
 
 <style>
+	body {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+
 	main {
 		margin: 0 auto;
-		padding: 0.5rem 0.75rem;
 		outline: 1px solid #ddd;
+		width: 8.5in;
+		height: 11in;
+		padding: 0.15in 0.15in;
+	}
+
+	@media not print {
+		main {
+			outline: 1px dotted #0004;
+			margin-top: 64px;
+		}
 	}
 </style>

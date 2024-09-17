@@ -1,120 +1,99 @@
 ---
 import { Icon } from 'astro-icon/components'
-import Section from '@/components/Section.astro'
+import RenderMarkdown from '@/components/RenderMarkdown.astro'
 import { getExperience } from '@/data/experience'
-import {
-    properCase,
-    unsluglify,
-    getDisplayDate,
-} from '@/util'
+import { getDisplayDate } from '@/util'
 
 const experience = await getExperience()
 ---
 
-<Section id="experience" data-count={experience.length}>
+<section id="experience" data-item-count={experience.length}>
     <div class="section-title">
         <h2>Experience</h2>
         <Icon name="ri:briefcase-4-fill" />
     </div>
 
     <div>
-        {experience.map(({ id, data: { url, title, location, startYear, startMonth, endYear, endMonth, image, skills, bullets, description } }) => (
-            <div class="experience">
+        {experience.map(({ slug, data: { name, url, title, location, startYear, startMonth, endYear, endMonth } }) => (
+            <article class="experience">
                 <div class="header">
-                    <div class="name">
-                        <h3>{properCase(unsluglify(id))}</h3>
-                        {/* {image && <img src={image} alt="" class="logo" />} */}
+                    <h3 class="title">{title}</h3>
+
+                    <span>&mdash;</span>
+
+                    <div class="company-name">
+                        <span class="personal">{name}</span>
                         {url && (
-                            <a href={url} target="_blank" referrerpolicy="no-referrer" class="ez-click">
+                            <a href={url} target="_blank" referrerpolicy="no-referrer" class="ez-click is-icon">
                                 <Icon name="ri:external-link-line" />
                             </a>
                         )}
                     </div>
+
+                    <div class="grow" />
+
+                    <div class="location">
+                        {location && (
+                            <Icon name="ri:map-pin-2-line" />
+                            <span class="personal">{location}</span>
+                        )}
+                    </div>
+
+                    <span>&mdash;</span>
+
                     <div class="dates">
                         <Icon name="ri:calendar-line" />
                         <span>{getDisplayDate(startYear, startMonth)} - {getDisplayDate(endYear, endMonth)}</span>
                     </div>
                 </div>
-                <div class="header">
-                    <div class="title">{title}</div>
-                    {location && (
-                        <div class="location">
-                            <Icon name="ri:map-pin-2-line" />
-                            <span>{location}</span>
-                        </div>
-                    )}
-                </div>
+
+                {/* <hr /> */}
+
                 <div>
-                    <div class="description">
-                        {description}
-                    </div>
-                    {/* <div class="skills">
-                        Skills: {skills.join(', ')}
-                    </div> */}
-                    {bullets?.length && (
-                        <ul>
-                            {bullets.map(item => <li>{item}</li>)}
-                        </ul>
-                    )}
+                    {<RenderMarkdown type="experience" slug={slug} />}
                 </div>
-            </div>
+            </article>
         ))}
     </div>
-</Section>
+</section>
 
 <style>
-    #experience[data-count="0"] {
-        display: none;
-    }
-
-    .experience {
-    }
-
-    .experience:not(:last-child)::after {
-        content: "";
-        display: block;
-        height: 1px;
-        margin: 0.25rem 0rem;
-        background: linear-gradient(to right, transparent 20%, #0008, transparent 80%);
-    }
-
-    .name {
-        display: flex;
-        align-items: baseline;
-        gap: 0.5ch;
+    #experience {
+        /** Page break inside because this is the biggest section usually. */
+        page-break-inside: auto;
+        break-inside: auto;
     }
 
     .header {
         display: flex;
         justify-content: space-between;
-        align-items: center;
+        align-items: baseline;
+        gap: 1ch;
     }
 
-    .title {
+    .company-name {
+        display: flex;
+        justify-content: center;
+        align-items: baseline;
         font-weight: bold;
+        /* text-decoration: underline; */
+        gap: 0.5ch;
+    }
+
+    .location {
+        font-style: italic;
+    }
+
+    .dates {
+        font-weight: bold;
+    }
+
+    .location svg {
+        vertical-align: top;
     }
 
     .logo {
         height: 1.5em;
         filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.5));
     }
-
-    .location, .dates {
-        display: flex;
-        align-items: center;
-        gap: 0.5ch;
-    }
-
-    .description {
-        font-style: italic;
-    }
-
-    .skills {
-    }
-
-    /* @media print {
-        .name a {
-            display: none;
-        }
-    } */
 </style>

@@ -1,16 +1,15 @@
 import { defineCollection, getCollection, z } from 'astro:content'
 
 const schema = z.object({
-    description: z.string(),
-    url: z.string().optional(),
+    name: z.string(),
 })
 
-export const AwardsCollection = defineCollection({ schema, type: 'data' })
+export const AwardsCollection = defineCollection({ schema, type: 'content' })
 
 export type AwardType = z.infer<typeof schema>
 
 export async function getAwards() {
-	let items = await getCollection('awards') ?? []
+	let items = await getCollection('awards')
     items.sort((a, b) => a.id.localeCompare(b.id))
 	return items
 }

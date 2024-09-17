@@ -1,45 +1,43 @@
 ---
 import { Icon } from 'astro-icon/components'
-import Section from '@/components/Section.astro'
 import { getReferences } from '@/data/references'
-import { unsluglify, properCase } from '@/util'
 
 const references = await getReferences()
 ---
 
-<Section id="references" data-count={references.length}>
+<section id="references" data-item-count={references.length}>
     <div class="section-title">
         <h2>References</h2>
         <Icon name="ri:suitcase-fill" />
     </div>
 
-    <div class="references">
-        {references.map(({ id, data: { title, company, email, phone } }) => (
-            <div class="reference">
-                <div class="name">{properCase(unsluglify(id))}</div>
-                <div style="flex-grow:1;">{title} at {company}</div>
-                {email && <div><a href={`mailto:${email}`}>{email}</a></div>}
-                {phone && <div><a href={`tel:${phone.replaceAll(/[^\d\+]/g, '')}`}>{phone}</a></div>}
-            </div>
-        ))}
-    </div>
-</Section>
+    <article>
+        <ul>
+            {references.map(({ data: { name, title, company, email, phone } }) => (
+                <li>
+                    <span class="name personal">{name}</span>
+                    <span>{title} at <span class="personal">{company}</span></span>
+                    <span class="personal">{email}</span>
+                    <span class="personal">{phone}</span>
+                </li>
+            ))}
+        </ul>
+    </article>
+</section>
 
 <style>
-    #references[data-count="0"] {
-        display: none;
-    }
-
-    .references {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 0.5em;
-    }
-
     .name {
         font-weight: bold;
     }
 
-    .reference {
+    li > *:not(:last-child)::after {
+        content: " — ";
+        display: inline;
+    }
+</style>
+
+<style is:global>
+    body:not(.references) #references {
+        display: none;
     }
 </style>

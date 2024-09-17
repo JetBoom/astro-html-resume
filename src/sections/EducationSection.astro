@@ -1,55 +1,59 @@
 ---
 import { Icon } from 'astro-icon/components'
-import Section from '@/components/Section.astro'
+import RenderMarkdown from '@/components/RenderMarkdown.astro'
 import { getEducation } from '@/data/education'
-import { unsluglify, properCase } from '@/util'
 
 const education = await getEducation()
 ---
 
-<Section id="education" data-count={education.length}>
+<section id="education" data-item-count={education.length}>
     <div class="section-title">
         <h2>Education</h2>
         <Icon name="ri:school-fill" />
     </div>
 
     <div class="education">
-        {education.map(({ id, data: { degree, description, image } }) => (
-            <div class="education-item">
-                <div>
-                    <h3>{properCase(unsluglify(id))}</h3>
-                    <div class="degree">{degree}</div>
-                    {description && <div>{description}</div>}
+        {education.map(({ slug, data: { name, degree, subject, year } }) => (
+            <article class="education-item">
+                <div class="education-header">
+                    <h3>{degree}</h3>
+
+                    {subject && (
+                        <span>&mdash;</span>
+
+                        <div class="subject">
+                            {subject}
+                        </div>
+                    )}
+
+                    <span>&mdash;</span>
+
+                    <div class="name personal">
+                        {name}
+                    </div>
+
+                    <span>&mdash;</span>
+
+                    <div class="dates">
+                        <Icon name="ri:calendar-line" />
+                        <span>{year}</span>
+                    </div>
                 </div>
-                {image && <img src={image} alt="" />}
-            </div>
+                
+                <RenderMarkdown type="education" slug={slug} />
+            </article>
         ))}
     </div>
-</Section>
+</section>
 
 <style>
-    #education[data-count="0"] {
-        display: none;
-    }
-
-    .education {
+    .education-header {
         display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
+        align-items: baseline;
+        gap: 1ch;
     }
 
-    .education-item {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-
-        & > img {
-            max-width: 2em;
-            max-height: 2em;
-        }
-    }
-
-    .degree {
+    .subject, .name, .dates {
         font-weight: bold;
     }
 </style>

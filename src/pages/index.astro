@@ -12,24 +12,15 @@ import AwardsSection from '@/sections/AwardsSection.astro'
 <Layout>
 	<SummarySection />
 
-	<div data-has-columns class="split split-favor-left">
-		<ExperienceSection />
-		<SkillsSection />
-	</div>
+	<SkillsSection />
+
+	<ExperienceSection />
+	
+	<EducationSection />
 
 	<ProjectsSection />
 
-	<div data-has-columns class="split split-even">
-		<EducationSection />
-
-		<AwardsSection />
-	</div>
+	<AwardsSection />
 
 	<ReferencesSection />
 </Layout>
-
-<style is:global>
-	.single-column *[data-has-columns] {
-		display: block!important;
-	}
-</style>
