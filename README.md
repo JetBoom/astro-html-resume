@@ -7,7 +7,11 @@
 
 * I have a [personal website](https://github.com/jetboom/personal-site) made in Astro and I want the info to be in sync.
 * HTML can be converted to a PDF very easily and ATS doesn't care how the PDF is made.
-* I like HTML and Markdown.
+* I like Markdown.
+
+## Todo
+
+- [ ] Option to convert from **Markdown -> DOCX** instead of printing directly from HTML to PDF. This will vastly improve ATS compatibility.
 
 ## Project Structure
 
