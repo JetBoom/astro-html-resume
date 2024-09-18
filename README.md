@@ -6,7 +6,6 @@
 **Why** a resume in Astro?
 
 * I have a [personal website](https://github.com/jetboom/personal-site) made in Astro and I want the info to be in sync.
-* HTML can be converted to a PDF very easily and ATS doesn't care how the PDF is made.
 * I like Markdown.
 
 ## Todo
