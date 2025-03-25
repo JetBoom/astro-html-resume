@@ -33,7 +33,7 @@
     "@iconify-json/logos": "latest",
     "@iconify-json/ri": "latest",
 		"@iconify-json/skill-icons": "latest",
-    "astro": "^4.15.2",
+    "astro": "^4.16.18",
     "typescript": "^5.5.4"
   },
   "devDependencies": {
